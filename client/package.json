@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@11ty/eleventy": "^0.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  },
+  "name": "mealplanner-static",
+  "version": "0.1.0",
+  "description": "Frontend for Mealplanner to learn some JAMstack",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "lint": "eslint ."
+  },
+  "author": "James A. Sral",
+  "license": "MIT"
+}
