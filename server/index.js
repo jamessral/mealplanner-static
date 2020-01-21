@@ -1,23 +1,23 @@
-const { Keystone } = require('@keystonejs/keystone');
-const { PasswordAuthStrategy } = require('@keystonejs/auth-password');
-const { Text, Checkbox, Password } = require('@keystonejs/fields');
-const { GraphQLApp } = require('@keystonejs/app-graphql');
-const { AdminUIApp } = require('@keystonejs/app-admin-ui');
-const initialiseData = require('./initial-data');
+const { Keystone } = require("@keystonejs/keystone");
+const { PasswordAuthStrategy } = require("@keystonejs/auth-password");
+const { Text, Checkbox, Password } = require("@keystonejs/fields");
+const { GraphQLApp } = require("@keystonejs/app-graphql");
+const { AdminUIApp } = require("@keystonejs/app-admin-ui");
+const initialiseData = require("./initial-data");
 
-const { MongooseAdapter: Adapter } = require('@keystonejs/adapter-mongoose');
+const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
 
 const PROJECT_NAME = "Mealplanner-CMS";
-
 
 const keystone = new Keystone({
   name: PROJECT_NAME,
   adapter: new Adapter(),
-  onConnect: initialiseData,
+  onConnect: initialiseData
 });
 
 // Access control functions
-const userIsAdmin = ({ authentication: { item: user } }) => Boolean(user && user.isAdmin);
+const userIsAdmin = ({ authentication: { item: user } }) =>
+  Boolean(user && user.isAdmin);
 const userOwnsItem = ({ authentication: { item: user } }) => {
   if (!user) {
     return false;
@@ -31,30 +31,30 @@ const userIsAdminOrOwner = auth => {
 };
 const access = { userIsAdmin, userOwnsItem, userIsAdminOrOwner };
 
-keystone.createList('User', {
+keystone.createList("User", {
   fields: {
     name: { type: Text },
     email: {
       type: Text,
-      isUnique: true,
+      isUnique: true
     },
     isAdmin: { type: Checkbox },
     password: {
-      type: Password,
-    },
+      type: Password
+    }
   },
   access: {
     read: access.userIsAdminOrOwner,
     update: access.userIsAdminOrOwner,
     create: access.userIsAdmin,
     delete: access.userIsAdmin,
-    auth: true,
-  },
+    auth: true
+  }
 });
 
 const authStrategy = keystone.createAuthStrategy({
   type: PasswordAuthStrategy,
-  list: 'User',
+  list: "User"
 });
 
 module.exports = {
@@ -63,7 +63,7 @@ module.exports = {
     new GraphQLApp(),
     new AdminUIApp({
       enableDefaultRoute: true,
-      authStrategy,
-    }),
-  ],
+      authStrategy
+    })
+  ]
 };
