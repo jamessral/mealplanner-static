@@ -1,0 +1,32 @@
+/* Global Variables */
+:root {
+  --primary-color: #b8ffeb;
+  --font-family: "Belfast", "Lato", "Nunito Sans", "Roboto", "San Fransisco",
+    "Noto Sans", "sans serif", sans, monospace;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-family: var(--font-family);
+}
+
+/* Utility Classes */
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: col;
+}
