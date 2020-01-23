@@ -1,0 +1,29 @@
+{
+  "info": {
+    "name": "Ingredient"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "estimated_price": {
+      "type": "decimal"
+    }
+  },
+  "connection": "default",
+  "collectionName": "ingredients"
+}
